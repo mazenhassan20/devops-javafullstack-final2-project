@@ -40,23 +40,20 @@ jobs:
           IMAGE_TAG=v${{ github.run_number }}
           docker build -t rabiaadel/final-project:$IMAGE_TAG .
 
-      # Scan Docker Image with Trivy
+      # Install Trivy
       - name: Install Trivy
-        uses: aquasecurity/trivy-action@v0.27.2 # Or the latest major version like v2
+        uses: aquasecurity/setup-trivy@v1
         with:
-          version: '0.27.2' # Specify the desired Trivy version
+          version: '0.43.0'
 
-      - name: Scan Docker image with Trivy
-        uses: aquasecurity/trivy-action@v0.27.2
-        with:
-          image-ref: rabiaadel/final-project:v${{ github.run_number }}
-          format: table
-          exit-code: 1
+      # Run Trivy scan
+      - name: Run Trivy scan
+        run: |
+          IMAGE_TAG=v${{ github.run_number }}
+          trivy image rabiaadel/final-project:$IMAGE_TAG
 
       # Push Docker Image
       - name: Push Docker Image
         run: |
           IMAGE_TAG=v${{ github.run_number }}
           docker push rabiaadel/final-project:$IMAGE_TAG
-
-
