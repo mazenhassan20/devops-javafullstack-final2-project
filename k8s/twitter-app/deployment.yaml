@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: final-project
+  namespace: twitter-app
+  labels:
+    app: final-project
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: final-project
+  template:
+    metadata:
+      labels:
+        app: final-project
+    spec:
+      containers:
+      - name: final-project
+        image: rabiaadel/final-project:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_HOST
+          value: mysql.db.svc.cluster.local
+        - name: DB_USER
+          value: appuser
+        - name: DB_PASSWORD
+          value: apppass
+        - name: DB_NAME
+          value: twitterapp
+        - name: DB_PORT
+          value: "3306"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"

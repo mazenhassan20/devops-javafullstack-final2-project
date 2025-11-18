@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: twitter-app-svc
+  namespace: twitter-app
+  labels:
+    app: final-project
+spec:
+  selector:
+    app: final-project
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  type: ClusterIP

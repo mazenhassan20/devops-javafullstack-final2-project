@@ -1,0 +1,1 @@
+MySQL deployed! Access with service: {{ include "db.fullname" . }} on port 3306

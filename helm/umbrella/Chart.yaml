@@ -1,0 +1,17 @@
+apiVersion: v2
+name: umbrella
+description: Umbrella chart for fullstack app
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+
+dependencies:
+  - name: twitter-app
+    version: 0.1.0
+    repository: "file://../twitter-app"
+  - name: db
+    version: 0.1.0
+    repository: "file://../db"
+  - name: monitoring
+    version: 0.1.0
+    repository: "file://../monitoring"

@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: twitter-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/rabiaadel/devops-javafullstack-final-project.git'  # Replace with your repo
+    path: k8s/twitter-app
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: twitter-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

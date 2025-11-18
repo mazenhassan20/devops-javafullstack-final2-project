@@ -1,0 +1,11 @@
+grafana:
+  service:
+    type: NodePort
+    port: 3000
+  adminUser: admin
+  adminPassword: secret
+
+prometheus:
+  service:
+    type: NodePort
+    port: 9090
