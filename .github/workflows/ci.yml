@@ -44,7 +44,7 @@ jobs:
       - name: Install Trivy
         uses: aquasecurity/setup-trivy@v0.2.3
         with:
-          version: '0.43.0'
+          version: latest
 
       # Run Trivy scan
       - name: Run Trivy scan
@@ -57,4 +57,3 @@ jobs:
         run: |
           IMAGE_TAG=v${{ github.run_number }}
           docker push rabiaadel/final-project:$IMAGE_TAG
-
