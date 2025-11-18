@@ -41,6 +41,11 @@ jobs:
           docker build -t rabiaadel/final-project:$IMAGE_TAG .
 
       # Scan Docker Image with Trivy
+      - name: Install Trivy
+        uses: aquasecurity/trivy-action@v0.27.2 # Or the latest major version like v2
+        with:
+          version: '0.27.2' # Specify the desired Trivy version
+
       - name: Scan Docker image with Trivy
         uses: aquasecurity/trivy-action@v0.27.2
         with:
