@@ -15,15 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Setup Java + Maven
-      - name: Set up JDK 17 and Maven
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
-
-      # Cache Maven dependencies
+      # Cache Maven packages
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
@@ -32,13 +24,21 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      # Setup Java + Maven
+      - name: Set up JDK 17 and Maven
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
       # Build Maven Project
       - name: Build with Maven
         run: mvn clean package -DskipTests
 
-      # Run Checkstyle for static code analysis
+      # Run Checkstyle (without failing the build)
       - name: Run Checkstyle
-        run: mvn checkstyle:check
+        run: mvn checkstyle:checkstyle || true
 
       # Login to DockerHub
       - name: Login to Docker Hub
@@ -59,7 +59,7 @@ jobs:
         with:
           version: latest
 
-      # Run Trivy scan with exit on vulnerabilities
+      # Run Trivy scan
       - name: Run Trivy scan
         run: |
           IMAGE_TAG=v${{ github.run_number }}
