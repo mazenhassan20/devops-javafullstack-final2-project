@@ -42,7 +42,7 @@ jobs:
 
       # Scan Docker Image with Trivy
       - name: Scan Docker image with Trivy
-        uses: aquasecurity/trivy-action@v0.33.1
+        uses: aquasecurity/trivy-action@eeb9a3b82bdf3c8c2d0f45f02e6d5e1c8a8c1c29
         with:
           image-ref: rabiaadel/final-project:v${{ github.run_number }}
           format: table
@@ -53,6 +53,5 @@ jobs:
         run: |
           IMAGE_TAG=v${{ github.run_number }}
           docker push rabiaadel/final-project:$IMAGE_TAG
-
 
 
